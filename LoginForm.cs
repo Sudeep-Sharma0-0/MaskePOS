@@ -16,5 +16,13 @@ namespace MaskePOS
         {
             InitializeComponent();
         }
+
+        private void loginBtn_Click(object sender, EventArgs e)
+        {
+            string userId = idBox.Text;
+            string password = passBox.Text;
+
+            dbUsers.SearchUser(userId);
+        }
     }
 }

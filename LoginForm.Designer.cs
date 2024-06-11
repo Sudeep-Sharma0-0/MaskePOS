@@ -28,13 +28,122 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.baseFlowLayout = new System.Windows.Forms.FlowLayoutPanel();
+            this.idLabel = new System.Windows.Forms.Label();
+            this.passLabel = new System.Windows.Forms.Label();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.idBox = new System.Windows.Forms.TextBox();
+            this.passBox = new System.Windows.Forms.TextBox();
+            this.loginBtn = new System.Windows.Forms.Button();
+            this.baseFlowLayout.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // baseFlowLayout
+            // 
+            this.baseFlowLayout.AutoSize = true;
+            this.baseFlowLayout.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.baseFlowLayout.Controls.Add(this.splitContainer1);
+            this.baseFlowLayout.Location = new System.Drawing.Point(234, 159);
+            this.baseFlowLayout.Name = "baseFlowLayout";
+            this.baseFlowLayout.Padding = new System.Windows.Forms.Padding(10);
+            this.baseFlowLayout.Size = new System.Drawing.Size(305, 170);
+            this.baseFlowLayout.TabIndex = 0;
+            // 
+            // idLabel
+            // 
+            this.idLabel.AutoSize = true;
+            this.idLabel.Location = new System.Drawing.Point(46, 18);
+            this.idLabel.Name = "idLabel";
+            this.idLabel.Size = new System.Drawing.Size(49, 16);
+            this.idLabel.TabIndex = 0;
+            this.idLabel.Text = "UserID";
+            // 
+            // passLabel
+            // 
+            this.passLabel.AutoSize = true;
+            this.passLabel.Location = new System.Drawing.Point(28, 62);
+            this.passLabel.Name = "passLabel";
+            this.passLabel.Size = new System.Drawing.Size(67, 16);
+            this.passLabel.TabIndex = 1;
+            this.passLabel.Text = "Password";
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Location = new System.Drawing.Point(13, 13);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.idLabel);
+            this.splitContainer1.Panel1.Controls.Add(this.passLabel);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.passBox);
+            this.splitContainer1.Panel2.Controls.Add(this.loginBtn);
+            this.splitContainer1.Panel2.Controls.Add(this.idBox);
+            this.splitContainer1.Size = new System.Drawing.Size(279, 144);
+            this.splitContainer1.SplitterDistance = 100;
+            this.splitContainer1.TabIndex = 2;
+            // 
+            // idBox
+            // 
+            this.idBox.Location = new System.Drawing.Point(3, 15);
+            this.idBox.Name = "idBox";
+            this.idBox.Size = new System.Drawing.Size(103, 22);
+            this.idBox.TabIndex = 0;
+            // 
+            // passBox
+            // 
+            this.passBox.Location = new System.Drawing.Point(3, 59);
+            this.passBox.Name = "passBox";
+            this.passBox.Size = new System.Drawing.Size(103, 22);
+            this.passBox.TabIndex = 1;
+            // 
+            // loginBtn
+            // 
+            this.loginBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.loginBtn.Location = new System.Drawing.Point(3, 103);
+            this.loginBtn.Name = "loginBtn";
+            this.loginBtn.Size = new System.Drawing.Size(103, 38);
+            this.loginBtn.TabIndex = 2;
+            this.loginBtn.Text = "Login";
+            this.loginBtn.UseVisualStyleBackColor = true;
+            this.loginBtn.Click += new System.EventHandler(this.loginBtn_Click);
+            // 
+            // LoginForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            this.Controls.Add(this.baseFlowLayout);
+            this.Name = "LoginForm";
+            this.Text = "Maske Ltd. Login";
+            this.baseFlowLayout.ResumeLayout(false);
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel1.PerformLayout();
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
+
+        private System.Windows.Forms.FlowLayoutPanel baseFlowLayout;
+        private System.Windows.Forms.Label idLabel;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.Label passLabel;
+        private System.Windows.Forms.TextBox passBox;
+        private System.Windows.Forms.TextBox idBox;
+        private System.Windows.Forms.Button loginBtn;
     }
 }
 
