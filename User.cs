@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MaskePOS
+namespace MaskeyPOS
 {
-    internal class User
+    class User
     {
         public string Name { get; set; }
         public string Id { get; set; }
         public string Password { get; set; }
 
-        public User(string name, string id, string password)
+        public User(string id, string name, string password)
         {
             Name = name;
             Id = id;

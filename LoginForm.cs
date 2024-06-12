@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace MaskePOS
+namespace MaskeyPOS
 {
     public partial class LoginForm : Form
     {
@@ -22,7 +22,9 @@ namespace MaskePOS
             string userId = idBox.Text;
             string password = passBox.Text;
 
-            dbUsers.SearchUser(userId);
+            User user = new User("Sudeep", userId, password);
+
+            dbUsers.AddUser(user);
         }
     }
 }

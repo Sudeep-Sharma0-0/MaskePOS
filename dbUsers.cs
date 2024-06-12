@@ -8,13 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace MaskePOS
+namespace MaskeyPOS
 {
     class dbUsers
     {
         public static SqlConnection GetConnection()
         {
             string dbStr = "Data Source=DESKTOP-58J0S0K;Initial Catalog=maskeyDb; Integrated Security=True";
+
             SqlConnection conn = new SqlConnection(dbStr);
             try
             {
@@ -29,55 +30,116 @@ namespace MaskePOS
 
         public static void AddUser(User user)
         {
-            SqlConnection conn = GetConnection();
-
             if (user == null)
             {
-                throw new ArgumentNullException("user");
+                throw new ArgumentNullException(nameof(user));
             }
-            string query = "INSERT INTO users_table (userid, username, userpass) VALUES (user.Id, user.Name, user.Password)";
-            SqlCommand cmd = new SqlCommand(query, conn);
 
-            try
+            using (SqlConnection conn = GetConnection())
             {
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("Successfully added user: ", user.ToString());
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error adding new user: \n", ex.Message);
+                string query = "INSERT INTO users_table (username, userpass) VALUES (@Name, @Password)";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Name", user.Name);
+                    cmd.Parameters.AddWithValue("@Password", user.Password);
+
+                    try
+                    {
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error adding user: {ex.Message}");
+                    }
+                }
             }
         }
 
-        public static void SearchUser(string userId)
+        public static User SearchUser(string id)
         {
-            SqlConnection conn = GetConnection();
-            
-            if (userId == null)
+            using (SqlConnection conn = GetConnection())
             {
-                throw new ArgumentNullException("username");
-            }
-            string query = "SELECT * FROM users_table WHERE username=username";
-            SqlCommand cmd = new SqlCommand(query, conn);
-
-            using (SqlDataReader reader = cmd.ExecuteReader())
-            {
-                if (reader.HasRows)
+                string query = "SELECT id, name, password FROM users_table WHERE id = @Id";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
-                    while (reader.Read())
+                    cmd.Parameters.AddWithValue("@Id", id);
+
+                    try
                     {
-                        string id = reader.GetString(reader.GetOrdinal("userid"));
-                        if (id == userId)
+                        conn.Open();
+                        using (SqlDataReader reader = cmd.ExecuteReader())
                         {
-                            string username = reader.GetString(reader.GetOrdinal("username"));
-                            string userpass = reader.GetString(reader.GetOrdinal("userpass"));
-                            MessageBox.Show($"UserId: {id}, Username: {username}, Password: {userpass}");
+                            if (reader.Read())
+                            {
+                                return new User(
+                                    reader["id"].ToString(),
+                                    reader["username"].ToString(),
+                                    reader["userpass"].ToString()
+                                );
+                            }
+                            else
+                            {
+                                return null;
+                            }
                         }
                     }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error retrieving user: {ex.Message}");
+                        return null;
+                    }
                 }
-                else
+            }
+        }
+
+        public static void UpdateUser(User user)
+        {
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user));
+            }
+
+            using (SqlConnection conn = GetConnection())
+            {
+                string query = "UPDATE users_table SET username = @Name, userpass = @Password WHERE id = @Id";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
-                    MessageBox.Show("No user found with the specified username.");
+                    cmd.Parameters.AddWithValue("@Id", user.Id);
+                    cmd.Parameters.AddWithValue("@Name", user.Name);
+                    cmd.Parameters.AddWithValue("@Password", user.Password);
+
+                    try
+                    {
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error updating user: {ex.Message}");
+                    }
+                }
+            }
+        }
+
+        public static void DeleteUser(string id)
+        {
+            using (SqlConnection conn = GetConnection())
+            {
+                string query = "DELETE FROM users_table WHERE id = @Id";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Id", id);
+
+                    try
+                    {
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error deleting user: {ex.Message}");
+                    }
                 }
             }
         }

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MaskePOS.Properties
+namespace MaskeyPOS.Properties
 {
 
 

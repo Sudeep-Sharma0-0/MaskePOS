@@ -1,4 +1,4 @@
-﻿namespace MaskePOS
+﻿namespace MaskeyPOS
 {
     partial class LoginForm
     {
@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.baseFlowLayout = new System.Windows.Forms.FlowLayoutPanel();
-            this.idLabel = new System.Windows.Forms.Label();
-            this.passLabel = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.idBox = new System.Windows.Forms.TextBox();
+            this.idlabel = new System.Windows.Forms.Label();
+            this.passLabel = new System.Windows.Forms.Label();
             this.passBox = new System.Windows.Forms.TextBox();
             this.loginBtn = new System.Windows.Forms.Button();
+            this.idBox = new System.Windows.Forms.TextBox();
             this.baseFlowLayout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -53,24 +53,6 @@
             this.baseFlowLayout.Size = new System.Drawing.Size(305, 170);
             this.baseFlowLayout.TabIndex = 0;
             // 
-            // idLabel
-            // 
-            this.idLabel.AutoSize = true;
-            this.idLabel.Location = new System.Drawing.Point(46, 18);
-            this.idLabel.Name = "idLabel";
-            this.idLabel.Size = new System.Drawing.Size(49, 16);
-            this.idLabel.TabIndex = 0;
-            this.idLabel.Text = "UserID";
-            // 
-            // passLabel
-            // 
-            this.passLabel.AutoSize = true;
-            this.passLabel.Location = new System.Drawing.Point(28, 62);
-            this.passLabel.Name = "passLabel";
-            this.passLabel.Size = new System.Drawing.Size(67, 16);
-            this.passLabel.TabIndex = 1;
-            this.passLabel.Text = "Password";
-            // 
             // splitContainer1
             // 
             this.splitContainer1.Location = new System.Drawing.Point(13, 13);
@@ -78,7 +60,7 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.idLabel);
+            this.splitContainer1.Panel1.Controls.Add(this.idlabel);
             this.splitContainer1.Panel1.Controls.Add(this.passLabel);
             // 
             // splitContainer1.Panel2
@@ -90,12 +72,23 @@
             this.splitContainer1.SplitterDistance = 100;
             this.splitContainer1.TabIndex = 2;
             // 
-            // idBox
+            // idlabel
             // 
-            this.idBox.Location = new System.Drawing.Point(3, 15);
-            this.idBox.Name = "idBox";
-            this.idBox.Size = new System.Drawing.Size(103, 22);
-            this.idBox.TabIndex = 0;
+            this.idlabel.AutoSize = true;
+            this.idlabel.Location = new System.Drawing.Point(46, 18);
+            this.idlabel.Name = "idlabel";
+            this.idlabel.Size = new System.Drawing.Size(49, 16);
+            this.idlabel.TabIndex = 0;
+            this.idlabel.Text = "UserID";
+            // 
+            // passLabel
+            // 
+            this.passLabel.AutoSize = true;
+            this.passLabel.Location = new System.Drawing.Point(28, 62);
+            this.passLabel.Name = "passLabel";
+            this.passLabel.Size = new System.Drawing.Size(67, 16);
+            this.passLabel.TabIndex = 1;
+            this.passLabel.Text = "Password";
             // 
             // passBox
             // 
@@ -114,6 +107,13 @@
             this.loginBtn.Text = "Login";
             this.loginBtn.UseVisualStyleBackColor = true;
             this.loginBtn.Click += new System.EventHandler(this.loginBtn_Click);
+            // 
+            // idBox
+            // 
+            this.idBox.Location = new System.Drawing.Point(3, 15);
+            this.idBox.Name = "idBox";
+            this.idBox.Size = new System.Drawing.Size(103, 22);
+            this.idBox.TabIndex = 0;
             // 
             // LoginForm
             // 
@@ -138,7 +138,7 @@
         #endregion
 
         private System.Windows.Forms.FlowLayoutPanel baseFlowLayout;
-        private System.Windows.Forms.Label idLabel;
+        private System.Windows.Forms.Label idlabel;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Label passLabel;
         private System.Windows.Forms.TextBox passBox;
