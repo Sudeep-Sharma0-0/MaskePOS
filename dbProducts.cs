@@ -36,7 +36,7 @@ namespace MaskePOS
 
             using (SqlConnection conn = GetConnection())
             {
-                string query = "INSERT INTO products_table (name, price, desc, image) VALUES (@Name, @Price, @Desc, @Image)";
+                string query = "INSERT INTO products_table (name, price, descr, image) VALUES (@Name, @Price, @Desc, @Image)";
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@Name", product.Name);
@@ -58,7 +58,7 @@ namespace MaskePOS
             }
         }
 
-        public static Product SearhProduct(int id)
+        public static Product SearchProduct(int id)
         {
             using (SqlConnection conn = GetConnection())
             {

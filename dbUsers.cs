@@ -45,8 +45,11 @@ namespace MaskeyPOS
 
                     try
                     {
-                        conn.Open();
-                        cmd.ExecuteNonQuery();
+                        int success = cmd.ExecuteNonQuery();
+                        if (success > 0) 
+                        {
+                            MessageBox.Show($"Successfully added {user.Name}");
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -122,7 +125,7 @@ namespace MaskeyPOS
             }
         }
 
-        public static void DeleteUser(string id)
+        public static void DeleteUser(int id)
         {
             using (SqlConnection conn = GetConnection())
             {
@@ -133,8 +136,16 @@ namespace MaskeyPOS
 
                     try
                     {
-                        conn.Open();
-                        cmd.ExecuteNonQuery();
+                        int success = cmd.ExecuteNonQuery();
+                        if (success > 0)
+                        {
+                            MessageBox.Show($"Successfully deleted user with id: {id}");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Error deleting the user.");
+                        }
+
                     }
                     catch (Exception ex)
                     {
