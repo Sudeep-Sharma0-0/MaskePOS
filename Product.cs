@@ -6,21 +6,19 @@ using System.Threading.Tasks;
 
 namespace MaskePOS
 {
-    class Product
+    public class Product
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
         public string Desc { get; set; }
         public string Image { get; set; }
 
-        public Product(string id, string name, decimal price, string desc, string image)
+        public Product(string name, decimal price, string desc)
         {
-            this.Id = id;
             this.Name = name;
             this.Price = price;
             this.Desc = desc;
-            this.Image = image;
         }
     }
 }

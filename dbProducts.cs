@@ -36,17 +36,15 @@ namespace MaskePOS
 
             using (SqlConnection conn = GetConnection())
             {
-                string query = "INSERT INTO products_table (name, price, descr, image) VALUES (@Name, @Price, @Desc, @Image)";
+                string query = "INSERT INTO products_table (name, price, descr) VALUES (@Name, @Price, @Desc)";
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@Name", product.Name);
                     cmd.Parameters.AddWithValue("@Price", product.Price);
                     cmd.Parameters.AddWithValue("@Desc", product.Desc);
-                    cmd.Parameters.AddWithValue("@Image", product.Image);
 
                     try
                     {
-                        conn.Open();
                         cmd.ExecuteNonQuery();
                         MessageBox.Show($"Successfully added product: {product.Name}");
                     }
@@ -62,7 +60,7 @@ namespace MaskePOS
         {
             using (SqlConnection conn = GetConnection())
             {
-                string query = "SELECT id, name, price, desc, image FROM products_table WHERE id = @Id";
+                string query = "SELECT id, name, price, descr FROM products_table WHERE id = @Id";
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@Id", id);
@@ -74,13 +72,13 @@ namespace MaskePOS
                         {
                             if (reader.Read())
                             {
-                                return new Product(
-                                    reader["id"].ToString(),
+                                Product product = new Product(
                                     reader["name"].ToString(),
                                     reader.GetDecimal(reader.GetOrdinal("price")),
-                                    reader["desc"].ToString(),
-                                    reader["image"].ToString()
+                                    reader["descr"].ToString()
                                 );
+                                product.Id = Int32.Parse(reader["id"].ToString());
+                                return product;
                             }
                             else
                             {
@@ -106,19 +104,18 @@ namespace MaskePOS
 
             using (SqlConnection conn = GetConnection())
             {
-                string query = "UPDATE products_table SET name = @Name, price = @Price, desc = @Desc, image = @Image WHERE id = @Id";
+                string query = "UPDATE products_table SET name = @Name, price = @Price, descr = @Desc WHERE id = @Id";
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@Id", product.Id);
                     cmd.Parameters.AddWithValue("@Name", product.Name);
                     cmd.Parameters.AddWithValue("@Price", product.Price);
                     cmd.Parameters.AddWithValue("@Desc", product.Desc);
-                    cmd.Parameters.AddWithValue("@Image", product.Image);
 
                     try
                     {
-                        conn.Open();
                         cmd.ExecuteNonQuery();
+                        MessageBox.Show($"Successfully updated product: {product.Name}");
                     }
                     catch (Exception ex)
                     {
@@ -138,8 +135,8 @@ namespace MaskePOS
                     cmd.Parameters.AddWithValue("@Id", id);
                     try
                     {
-                        conn.Open();
                         cmd.ExecuteNonQuery();
+                        MessageBox.Show("Product deletion successful!");
                     }
                     catch (Exception ex)
                     {
@@ -156,7 +153,7 @@ namespace MaskePOS
             using (SqlConnection conn = GetConnection())
             {
                 string query = @"
-                    SELECT id, name, price, desc, image 
+                    SELECT id, name, price, descr 
                     FROM products_table 
                     ORDER BY id 
                     OFFSET @Offset ROWS 
@@ -174,13 +171,14 @@ namespace MaskePOS
                         {
                             while (await reader.ReadAsync())
                             {
-                                products.Add(new Product(
-                                    reader["id"].ToString(),
+                                Product product = new Product(
                                     reader["name"].ToString(),
                                     reader.GetDecimal(reader.GetOrdinal("price")),
-                                    reader["desc"].ToString(),
-                                    reader["image"].ToString()
-                                ));
+                                    reader["descr"].ToString()
+                                );
+                                product.Id = Int32.Parse(reader["id"].ToString());
+
+                                products.Add(product);
                             }
                         }
                     }
@@ -192,5 +190,49 @@ namespace MaskePOS
             }
             return products;
         }
+        public static List<Product> GetAllProductsSync(int pageNumber, int pageSize)
+        {
+            List<Product> products = new List<Product>();
+
+            using (SqlConnection conn = GetConnection())
+            {
+                string query = @"
+            SELECT id, name, price, descr 
+            FROM products_table 
+            ORDER BY id 
+            OFFSET @Offset ROWS 
+            FETCH NEXT @PageSize ROWS ONLY";
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Offset", (pageNumber - 1) * pageSize);
+                    cmd.Parameters.AddWithValue("@PageSize", pageSize);
+
+                    try
+                    {
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Product product = new Product(
+                                    reader["name"].ToString(),
+                                    reader.GetDecimal(reader.GetOrdinal("price")),
+                                    reader["descr"].ToString()
+                                );
+                                product.Id = Int32.Parse(reader["id"].ToString());
+
+                                products.Add(product);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error retrieving products: {ex.Message}");
+                    }
+                }
+            }
+            return products;
+        }
+
     }
 }
