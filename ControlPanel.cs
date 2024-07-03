@@ -13,7 +13,7 @@ namespace MaskePOS
 {
     public partial class ControlPanel : Form
     {
-        public int ProductsPerPage = 5;
+        public int ProductsPerPage = 4;
         public int PageNumber = 1;
         public int prodId;
 
@@ -122,16 +122,26 @@ namespace MaskePOS
         {
             if (PageNumber > 1)
             {
+                string padder;
+
                 PageNumber -= 1;
-                pageLabel.Text = PageNumber.ToString();
+                if (PageNumber < 10) padder = "0";
+                else padder = "";
+
+                pageLabel.Text = padder + PageNumber.ToString();
                 LoadProducts(PageNumber);
             }
         }
 
         private void nextBtn_Click(object sender, EventArgs e)
         {
+            string padder;
+
             PageNumber += 1;
-            pageLabel.Text = PageNumber.ToString();
+            if (PageNumber < 10) padder = "0";
+            else padder = "";
+
+            pageLabel.Text = padder + PageNumber.ToString();
             LoadProducts(PageNumber);
         }
 

@@ -315,18 +315,17 @@
             // pageLabel
             // 
             this.pageLabel.AutoSize = true;
-            this.pageLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pageLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pageLabel.Location = new System.Drawing.Point(679, 175);
+            this.pageLabel.Location = new System.Drawing.Point(650, 175);
             this.pageLabel.Name = "pageLabel";
-            this.pageLabel.Size = new System.Drawing.Size(33, 38);
+            this.pageLabel.Size = new System.Drawing.Size(47, 36);
             this.pageLabel.TabIndex = 13;
-            this.pageLabel.Text = "1";
+            this.pageLabel.Text = "01";
             // 
             // nextBtn
             // 
             this.nextBtn.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nextBtn.Location = new System.Drawing.Point(718, 173);
+            this.nextBtn.Location = new System.Drawing.Point(703, 173);
             this.nextBtn.Name = "nextBtn";
             this.nextBtn.Size = new System.Drawing.Size(44, 40);
             this.nextBtn.TabIndex = 12;
@@ -337,7 +336,7 @@
             // prevBtn
             // 
             this.prevBtn.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.prevBtn.Location = new System.Drawing.Point(629, 173);
+            this.prevBtn.Location = new System.Drawing.Point(600, 173);
             this.prevBtn.Name = "prevBtn";
             this.prevBtn.Size = new System.Drawing.Size(44, 40);
             this.prevBtn.TabIndex = 11;
@@ -360,7 +359,7 @@
             // 
             this.productsGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.productsGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.productsGrid.Location = new System.Drawing.Point(6, 219);
+            this.productsGrid.Location = new System.Drawing.Point(3, 219);
             this.productsGrid.Name = "productsGrid";
             this.productsGrid.ReadOnly = true;
             this.productsGrid.RowHeadersWidth = 51;
@@ -377,7 +376,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(798, 446);
             this.Controls.Add(this.tabsControl);
             this.Name = "ControlPanel";
             this.Text = "ControlPanel";

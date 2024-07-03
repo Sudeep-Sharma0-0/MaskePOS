@@ -67,7 +67,6 @@ namespace MaskePOS
 
                     try
                     {
-                        conn.Open();
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
                             if (reader.Read())
@@ -146,7 +145,7 @@ namespace MaskePOS
             }
         }
 
-        public static async Task<List<Product>> GetAllProductsAsync(int pageNumber, int pageSize)
+        public static async Task<List<Product>> GetAllProductsAsync()
         {
             List<Product> products = new List<Product>();
 
@@ -154,19 +153,12 @@ namespace MaskePOS
             {
                 string query = @"
                     SELECT id, name, price, descr 
-                    FROM products_table 
-                    ORDER BY id 
-                    OFFSET @Offset ROWS 
-                    FETCH NEXT @PageSize ROWS ONLY";
+                    FROM products_table;";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
-                    cmd.Parameters.AddWithValue("@Offset", (pageNumber - 1) * pageSize);
-                    cmd.Parameters.AddWithValue("@PageSize", pageSize);
-
                     try
                     {
-                        await conn.OpenAsync();
                         using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                         {
                             while (await reader.ReadAsync())
